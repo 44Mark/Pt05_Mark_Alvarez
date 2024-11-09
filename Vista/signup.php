@@ -13,7 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <div class="registrar">
         <h1>Registrar-se</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form action="signup" method="post">
         <div class="contenedor-input">
             <label>Nom</label>
             <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>">

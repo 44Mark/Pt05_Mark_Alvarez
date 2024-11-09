@@ -14,7 +14,7 @@ include('./header.php');
 <body>
     <h1 class="fons">Inserció de Llibres</h1>
     <div class="insertar">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="insert">  
+        <form action="insert" method="post" class="insert">  
             <input type="hidden" name="accion" value="insertarLlibre">
 
             <div class="contenedor-input">
@@ -33,9 +33,8 @@ include('./header.php');
             </div>
 
             <input type="submit" value="Enviar" class="button">
-            <button class="button" onclick="window.location.href='./index.php';">Tornar al menu</button>
         </form>
-        
+        <button class="button" onclick="window.location.href='inici';">Tornar al menu</button>
         
         <?php
         // Si s'ha enviat el formulari, cridem a la funció comprovacioInsertarLlibre

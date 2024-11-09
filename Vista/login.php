@@ -7,7 +7,7 @@
 <body>
     <div class="login">
         <h1>Inici Sessió</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form action="login" method="post">
             <div class="contenedor-input">
                 <label>Correu electrònic</label>
                 <input type="email" name="correu" value="<?php echo isset($_COOKIE['correu']) ? htmlspecialchars($_COOKIE['correu']) : ''; ?>" >
