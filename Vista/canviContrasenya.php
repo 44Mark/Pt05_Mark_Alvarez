@@ -11,13 +11,12 @@ include(__DIR__ . '/header.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estil.css"> <!-- Asegúrate de que el archivo CSS está vinculado correctamente -->
     <title>Canviar Contraseña</title>
 </head>
 <body>
     <div class="contrasenya">
         <h2>Canviar Contraseña</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form action="canviContrasenya" method="POST">
             <div class="form-group">
                 <label for="antiga">Contrasenya Antiga:</label><br>
                 <input type="password" id="antiga" name="antiga">

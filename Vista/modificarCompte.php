@@ -41,7 +41,7 @@ include(__DIR__ . '/header.php');
                     <!-- Botón para cambiar contraseña -->
                     <div class="form-group">
                     <label for="canvi-contrasenya">Canviar Contrasenya:</label>
-                        <button type="button" onclick="window.location.href='Vista/canviContrasenya.php'" class="boton">Canviar contraseña</button>
+                        <button type="button" onclick="window.location.href='canviContrasenya'" class="boton">Canviar contraseña</button>
                     </div>
                     <!-- Botón de envío -->
                     <button type="submit" name="action" value="actualizar" class="button">Guardar canvis</button>
