@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteRule ^inici$ /index.php [L]
+RewriteRule ^login$ /Vista/login.php [L]
+RewriteRule ^signup$ /Vista/signup.php [L]
+RewriteRule ^gestio$ /Vista/gestio.php [L]
+RewriteRule ^logout$ /Controlador/logout.php [L]
+RewriteRule ^insert$ /Vista/insert.php [L]
+RewriteRule ^modificar$ /Vista/modificar.php [L]
+RewriteRule ^tot$ /Vista/tots.php [L]
+RewriteRule ^modificarCompte$ /Vista/modificarCompte.php [L]
