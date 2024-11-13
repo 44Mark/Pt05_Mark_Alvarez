@@ -10,3 +10,5 @@ RewriteRule ^modificar$ /Vista/modificar.php [L]
 RewriteRule ^tot$ /Vista/tots.php [L]
 RewriteRule ^modificarCompte$ /Vista/modificarCompte.php [L]
 RewriteRule ^canviContrasenya$ /Vista/canviContrasenya.php [L]
+
+ErrorDocument 404 /Vista/error404.html
