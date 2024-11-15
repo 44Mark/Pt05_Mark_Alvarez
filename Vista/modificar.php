@@ -9,6 +9,11 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 include('./header.php'); 
+
+if (!isset($_SESSION['correu'])) {
+    header('Location: error401');
+    exit;
+}
 ?>
 </head> 
 <body>

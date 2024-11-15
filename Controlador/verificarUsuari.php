@@ -45,52 +45,80 @@ function signup($nom, $correu, $contrasenya, $confirmacio_contrasenya) {
 }
 
 // Funció per verificar si te tot lo necessari per fer el login
-function login($correu, $contrasenya, $recordar) {
-    
+function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     $correu = trim(htmlspecialchars($correu));
     $contrasenya = trim(htmlspecialchars($contrasenya));
 
-    // Comprovem si els camp correu esta buit
+    // Comprobamos si el campo correo está vacío
     if (empty($correu)) {
-        $_SESSION['message'] = "El camp correu esta buit.";
-        return;
-        // Comprovem si els camp contraseya esta buit
-    }else if (empty($contrasenya)) {
-        $_SESSION['message'] = "El camp contraseya esta buit.";
-        return;
-    // Comprovem si el correu existeix
-    }else if (!correuExisteix($correu)) {
-        $_SESSION['message'] = "El correu no existeix.";
-        return;
+        $_SESSION['login_intents']++;
+        $_SESSION['message'] = "El campo correo está vacío.";
+        header('Location: login'); 
+        exit();
+    } else if (empty($contrasenya)) {
+        $_SESSION['login_intents']++;
+        $_SESSION['message'] = "El campo contraseña está vacío.";
+        header('Location: login'); 
+        exit();
+    } else if (!correuExisteix($correu)) {
+        $_SESSION['login_intents']++;
+        $_SESSION['message'] = "El correo no existe.";
+        header('Location: login'); 
+        exit();
     }
 
-    // Si tot esta correcte, cridem a obtenirUsuari per obtenir el correu de l'usuari
+    // Si el número de intentos fallidos es 3 o más, verificamos el reCAPTCHA
+    if ($_SESSION['login_intents'] >= 3) {
+        // Verificar la respuesta del reCAPTCHA
+        $secret_key = "6Ld4738qAAAAAFGexkXEU5VGMTaL3RQ1reQiqRIX";
+        $verify_url = "https://www.google.com/recaptcha/api/siteverify";
+        
+        // Creamos la solicitud a Google con los parámetros necesarios
+        $response = file_get_contents($verify_url . "?secret=" . $secret_key . "&response=" . $recaptcha_response);
+        $response_keys = json_decode($response, true);
+        
+        // Si el reCAPTCHA no es válido, mostramos un error
+        if (intval($response_keys["success"]) !== 1) {
+            $_SESSION['login_intents']++;
+            $_SESSION['message'] = "Por favor, verifica el reCAPTCHA.";
+            header('Location: login');
+            exit();
+        }
+    }
+
+    // Si todo está correcto, llamamos a obtenerUsuari para obtener los datos del usuario
     $usuari = obtenirUsuari($correu);
     
-    // Comprovem si la contrasenya es correcta
+    // Comprobamos si la contraseña es correcta
     if (!password_verify($contrasenya, $usuari['contrasenya'])) {
-        $_SESSION['message'] = "Contrasenya incorrecta.";
-        return;
+        $_SESSION['login_intents']++;
+        $_SESSION['message'] = "Contraseña incorrecta.";
+        header('Location: login'); 
+        exit();
     }
 
+    // Si la contraseña es correcta, reiniciamos el contador de intentos y desactivamos el reCAPTCHA
+    $_SESSION['login_intents'] = 0;
+    $_SESSION['show_recaptcha'] = false; 
+
+    // Si el usuario seleccionó recordar, guardamos las cookies
     if ($recordar) {
         setcookie('correu', $correu, time() + (86400 * 30), "/");
         setcookie('contrasenya', $contrasenya, time() + (86400 * 30), "/");
     }
     
-
-    $_SESSION['message'] = "Sessió iniciada correctament.";
-    
-    // Guardem el correu i el nom de l'usuari a la session per poder modificar els botons  de index.php(benvinguda) i header.php(navbar)
+    $_SESSION['message'] = "Sesión iniciada correctamente.";
     $_SESSION['correu'] = $usuari['correu'];
     $_SESSION['nom'] = $usuari['nom'];
     $_SESSION['foto'] = $usuari['foto'];
     $_SESSION['timeout'] = time();
     
-
+    // Redirigimos al usuario a la página principal
     header('Location: ../index.php');
     exit();
 }
+
+
 
 // Funció per canviar la contrasenya
 function canviarContrasenya($antiga, $nova, $repetir) {
