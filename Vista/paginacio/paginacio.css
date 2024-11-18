@@ -1,0 +1,37 @@
+.paginacio ul {
+    list-style: none;
+    text-align: center;
+}
+
+.paginacio ul li {
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+.paginacio ul .active a {
+    background: #cc4b33;
+}
+
+.paginacio ul .disabled {
+    background: #c2bfbf;
+    display: inline-block;
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding: 2px 2px;
+    cursor: not-allowed;
+    color: #fff;
+    text-decoration: none;
+}
+
+.paginacio ul li a {
+    display: inline-block;
+    font-family: 'Open Sans Condensed', sans-serif;
+    padding: 10px 20px;
+    background: #424242;
+    color: #fff;
+    text-decoration: none;
+}
+
+.paginacio ul li a:hover {
+    text-decoration: none;
+    background: #842818;
+}

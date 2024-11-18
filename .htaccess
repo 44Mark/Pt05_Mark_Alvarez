@@ -1,15 +1,15 @@
 RewriteEngine On
 
 RewriteRule ^inici$ /index.php [L]
-RewriteRule ^login$ /Vista/login.php [L]
-RewriteRule ^signup$ /Vista/signup.php [L]
+RewriteRule ^login$ /Vista/login/login.php [L]
+RewriteRule ^signup$ /Vista/signup/signup.php [L]
 RewriteRule ^gestio$ /Vista/gestio.php [L]
 RewriteRule ^logout$ /Controlador/logout.php [L]
-RewriteRule ^insert$ /Vista/insert.php [L]
-RewriteRule ^modificar$ /Vista/modificar.php [L]
+RewriteRule ^insert$ /Vista/insert_Articles/insert.php [L]
+RewriteRule ^modificar$ /Vista/modificar_Articles/modificar.php [L]
 RewriteRule ^tot$ /Vista/tots.php [L]
-RewriteRule ^modificarCompte$ /Vista/modificarCompte.php [L]
-RewriteRule ^canviContrasenya$ /Vista/canviContrasenya.php [L]
+RewriteRule ^modificarCompte$ /Vista/modificar_Compte/modificarCompte.php [L]
+RewriteRule ^canviContrasenya$ /Vista/canvi_Contrasenya/canviContrasenya.php [L]
 
 ErrorDocument 404 /Vista/error/error404.html
 

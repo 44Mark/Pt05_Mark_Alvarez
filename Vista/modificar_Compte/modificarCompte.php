@@ -1,8 +1,9 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); }
+    session_start();
+}
 
-include(__DIR__ . '/header.php');
+include('../header/header.php');
 
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
@@ -24,13 +25,13 @@ if (!isset($_SESSION['correu'])) {
             <?php if (!empty($_SESSION['foto'])): ?>
                 <div class="contenedor-foto">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="Foto de perfil" style="max-width: 300px; max-height: 300px;">
-                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                    <form action="modificarCompte" method="POST">
                         <button type="submit" name="action" value="borrar_foto" class="button">Borrar foto</button>
                     </form>
                 </div>
             <?php endif; ?>
             <div class="contenedor-formulario">
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+                <form action="modificarCompte" method="POST" enctype="multipart/form-data">
                     <!-- Campo para la foto de perfil -->
                     <div class="form-group">
                         <label for="foto">Foto de perfil:</label>
@@ -51,12 +52,12 @@ if (!isset($_SESSION['correu'])) {
                     <!-- Botón de envío -->
                     <button type="submit" name="action" value="actualizar" class="button">Guardar canvis</button>
                 </form>
-                <button class="button" onclick="window.location.href='./index.php';">Tornar al menú</button>
+                <button class="button" onclick="window.location.href='inici'">Tornar al menú</button>
             </div>
         </div>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            require '../Controlador/verificarUsuari.php';
+            require '../../Controlador/verificarUsuari.php';
             if ($_POST['action'] == 'actualizar') {
                 if(!empty($_POST['nom']) && !empty($_FILES['foto']['name'])) {
                     actualitzarTot($_POST['nom'], $_FILES['foto']);

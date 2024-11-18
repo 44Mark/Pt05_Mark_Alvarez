@@ -9,17 +9,17 @@ if (isset($_SESSION['correu'])) {
     $articles = obtenirArticles();
 }
 
-// 7 articles per pagina
-$articlesPerPage = 4;
+// Establecer el número de artículos por página desde la sesión o usar un valor por defecto
+$articlesPerPage = isset($_SESSION['num_escollit']) ? (int)$_SESSION['num_escollit'] : 6;
 
-// Pàgina per defecte la 1
+// Página por defecto la 1
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
-// Calcular el offset (Operació per saber a aprtir de quin article mostrar)
+// Calcular el offset (Operación para saber a partir de qué artículo mostrar)
 $offset = ($page - 1) * $articlesPerPage;
 
-// Obtenir el total d'articles
-$totalArticles = $totalArticles = (empty($articles)) ?  1 : count($articles);
+// Obtener el total de artículos
+$totalArticles = (empty($articles)) ? 1 : count($articles);
 
 // Calcular el número total de páginas
 $totalPages = ceil($totalArticles / $articlesPerPage);
@@ -31,6 +31,6 @@ if ($page > $totalPages) {
     exit();
 }
 
-// Obtenir els articles a mostrar
+// Obtener los artículos a mostrar
 $articlesToShow = array_slice($articles, $offset, $articlesPerPage);
 ?>

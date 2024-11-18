@@ -1,16 +1,19 @@
 <?php
-// Mark Álvarez
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+include('../header/header.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php include('./header.php'); ?>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar-se</title>
 </head>
 <body>
-
     <div class="registrar">
         <h1>Registrar-se</h1>
         <form action="signup" method="post">
@@ -22,23 +25,21 @@ if (session_status() == PHP_SESSION_NONE) {
             <label>Correu electrònic</label>
             <input type="email" name="correo" value="<?php echo isset($_POST['correo']) ? htmlspecialchars($_POST['correo']) : ''; ?>">
         </div>
-
             <div class="contenedor-input">
                 <label>Contrasenya</label>
                 <input type="password" name="contrasenya">
             </div>
-
             <div class="contenedor-input">
                 <label>Confirmació de contrasenya</label>
                 <input type="password" name="confirmacio_contrasenya">
             </div>
-            <input type="submit" class="button button-block" value="Registrar-se">
+            <input type="submit" class="button" value="Registrar-se">
         </form>
         
         <?php
         // Si s'ha enviat el formulari, cridem a la funció signup
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            require '../Controlador/verificarUsuari.php';
+            require '../../Controlador/verificarUsuari.php';
             signup($_POST['nombre'], $_POST['correo'], $_POST['contrasenya'], $_POST['confirmacio_contrasenya']);
         }
         // Si hi ha un missatge, el mostrem

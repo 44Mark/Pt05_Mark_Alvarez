@@ -1,5 +1,5 @@
 <?php
-require('../Model/llibres.php');
+require('../../Model/llibres.php');
 
 // Comprovem que els camps no estiguin buits i cridem a la funció insertLlibre
 function comprovactualitzarLlibre($isbn, $titol, $cos, $correu) {
@@ -23,7 +23,7 @@ function comprovactualitzarLlibre($isbn, $titol, $cos, $correu) {
     } else {
         actualitzarLlibre($isbn, $titol, $cos, $correu);
         $_SESSION['message'] = 'Llibre actualitzat correctament';
-        header('Location: ../index.php');
+        header('Location: /inici');
         exit();
     }
     }

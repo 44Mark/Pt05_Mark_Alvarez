@@ -1,13 +1,9 @@
-<!-- Mark Alvarez -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
 <?php
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include('./header.php'); 
+include('../header/header.php');
 
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
@@ -15,7 +11,13 @@ if (!isset($_SESSION['correu'])) {
 }
 ?>
 
-</head> 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Llibre</title>
+</head>
 <body>
     <h1 class="fons">Inserció de Llibres</h1>
     <div class="insertar">
@@ -44,7 +46,7 @@ if (!isset($_SESSION['correu'])) {
         <?php
         // Si s'ha enviat el formulari, cridem a la funció comprovacioInsertarLlibre
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            require('../Controlador/insertarLlibre.php');
+            require('../../Controlador/insertarLlibre.php');
             $missatge = comprovacioInsertarLlibre($_POST['isbn'], $_POST['titol'], $_POST['cos'], $_SESSION['correu']);
         }
         // Si hi ha un missatge, el mostrem

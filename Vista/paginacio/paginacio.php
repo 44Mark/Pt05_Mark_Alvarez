@@ -1,5 +1,5 @@
 <?php
-include(__DIR__ . '/../Controlador/controlPaginacio.php');
+include('./Controlador/controlPaginacio.php');
 ?>
         <section class="paginacio">
     <ul>

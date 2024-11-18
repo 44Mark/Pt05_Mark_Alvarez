@@ -3,7 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require('../Model/usuari.php');
+require('../../Model/usuari.php');
+require_once('../../env.php');
 
 // Funció per verificar si te tot lo necessari per  fer l'insert
 function signup($nom, $correu, $contrasenya, $confirmacio_contrasenya) {
@@ -70,7 +71,7 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     // Si el número de intentos fallidos es 3 o más, verificamos el reCAPTCHA
     if ($_SESSION['login_intents'] >= 3) {
         // Verificar la respuesta del reCAPTCHA
-        $secret_key = "6Ld4738qAAAAAFGexkXEU5VGMTaL3RQ1reQiqRIX";
+        $secret_key = CLAU_PRIVADA;
         $verify_url = "https://www.google.com/recaptcha/api/siteverify";
         
         // Creamos la solicitud a Google con los parámetros necesarios
@@ -209,14 +210,14 @@ function actualitzarFoto($foto) {
     }
 
     // Moure la foto a la carpeta de destinació
-    $destinacio = '../Vista/fotosUsuaris/' . basename($foto['name']);
+    $destinacio = '../../Vista/assets/fotosUsuaris/' . basename($foto['name']);
     if (!move_uploaded_file($foto['tmp_name'], $destinacio)) {
         $_SESSION['message'] = "Error en moure la foto.";
         return;
     }
 
     // Ajustar la ruta para la base de datos
-    $rutaBD = './Vista/fotosUsuaris/' . basename($foto['name']);
+    $rutaBD = '../../Vista/assets/fotosUsuaris/' . basename($foto['name']);
 
     // Actualitzar la ruta de la foto a la base de dades
     $correu = $_SESSION['correu']; // Usar el correo almacenado en la sesión

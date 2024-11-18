@@ -24,7 +24,7 @@
                 <?php if (isset($_SESSION['usuari_autenticat']) && $_SESSION['usuari_autenticat'] == true && !empty($_SESSION['foto'])): ?>
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="Foto de perfil" style="height: 45px;">
                 <?php else: ?>
-                    <img src="/Images/logo.png" style="height: 45px;">
+                    <img src="Vista/assets/images-work/logo.png" style="height: 45px;">
                 <?php endif; ?>
                 <div class="dropdown-content">
                     <?php if (isset($_SESSION['usuari_autenticat']) && $_SESSION['usuari_autenticat'] == true): ?> 

@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include(__DIR__ . '/header.php');
+include('../header/header.php');
 
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
@@ -41,7 +41,7 @@ if (!isset($_SESSION['correu'])) {
         </form>
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            require '../Controlador/verificarUsuari.php';
+            require '../../Controlador/verificarUsuari.php';
             canviarContrasenya($_POST['antiga'], $_POST['nova'], $_POST['repetir']);
         }
         // Si hi ha un missatge, el mostrem
