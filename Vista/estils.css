@@ -1,0 +1,65 @@
+@import url(./desplegable_Articles/desplegable.css);
+@import url(./paginacio/paginacio.css);
+@import url(./header/header.css);
+@import url(./articles/articles.css);
+@import url(./insert_Articles/insert.css);
+@import url(./login/login.css);
+@import url(./modificar_Articles/modificar.css);
+@import url(./canvi_Contrasenya/canviContrasenya.css);
+@import url(./modificar_Compte/modificarCompte.css);
+@import url(./signup/signup.css);
+@import url(./ordenacio_Articles/ordenacio.css);
+@import url(./vista_Admin/admin.css);
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 60px;
+    background-image: url('./assets/images-work/bibl.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.contenedor-central {
+    width: 80%;
+    max-width: 1200px;
+    margin: 2% auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #d64c2d;
+    padding: 14px 16px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #cc4b33;
+}
+
+.missatge {
+    color: black;
+    border: 2px solid #ccc;
+    padding: 5px;
+    margin: 10px auto;
+    width: 50%;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.contenidor-botons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}

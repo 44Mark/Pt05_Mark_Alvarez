@@ -1,0 +1,23 @@
+.form-ordenacio {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-ordenacio label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-ordenacio select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.form-ordenacio select:focus {
+    border-color: #007bff;
+    outline: none;
+}

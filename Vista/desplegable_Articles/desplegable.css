@@ -1,0 +1,23 @@
+.form-desplegable {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.form-desplegable label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.form-desplegable select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.form-desplegable select:focus {
+    border-color: #007bff;
+    outline: none;
+}

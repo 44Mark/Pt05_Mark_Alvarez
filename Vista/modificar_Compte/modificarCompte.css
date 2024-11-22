@@ -1,0 +1,84 @@
+.contenedor-central-modificar {
+    width: 60%;
+    max-width: 1000px;
+    margin: 5% auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.contenedor-foto {
+    flex: 1;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.contenedor-foto img{
+   margin-bottom: 20px;
+   border-radius: 75%;
+}
+
+.contenedor-formulario {
+    flex: 2;
+}
+
+.form-group {
+    margin-bottom: 10px; 
+    text-align: left; 
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #333; 
+}
+
+.form-group input {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button {
+    background-color: #cc4b33;
+    color: white;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: #aa3a22;
+}
+
+.boton{
+    background-color: #cc4b33;
+    color: white;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 40%;
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.boton:hover {
+    background-color: #aa3a22;
+}

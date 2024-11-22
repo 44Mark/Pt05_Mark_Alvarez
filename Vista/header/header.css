@@ -1,0 +1,86 @@
+/* Estils de la barra de navegació */ 
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #aa3a22;
+    padding: 7px;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center {
+    flex-grow: 1;
+    text-align: center;
+    position: relative;
+}
+
+.navbar a {
+    color: #f2f2f2;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #cc4b33;
+}
+
+.fixed-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f2f2f2;
+    position: fixed;
+    top: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap; 
+}
+
+/* Estils del menú desplegable */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px; 
+}
+.dropdown, img{
+    border-radius: 75%;
+}
+
+
+.dropdown img:hover {
+    background-color: #cc4b33;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #aa3a22;
+    min-width: 160px;
+    z-index: 1;
+    border: 2px solid black;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #cc4b33;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
