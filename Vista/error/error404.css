@@ -108,7 +108,7 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url('/Images/bibl.jpg');
+    background-image: url('../../Vista/assets/images-work/bibl.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

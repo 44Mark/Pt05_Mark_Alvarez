@@ -12,7 +12,7 @@ function comprovacioInsertarLlibre($isbn, $titol, $cos, $correu) {
     //Si la variable correu esta buit, redirigim a la pagina de login
     if (empty($correu)) {
         $_SESSION['message'] = 'Has d\'iniciar sessió per poder insertar un llibre';
-        header('Location: ../index.php');
+        header('Location: ../inici');
         exit();
     // Comprovem si el camp isbn esta buit
      }else if (empty($isbn)) {
@@ -45,7 +45,7 @@ function comprovacioInsertarLlibre($isbn, $titol, $cos, $correu) {
         } else {
             insertLlibre($isbn, $titol, $cos, $correu);
             $_SESSION['message'] = 'Llibre insertat correctament';
-            header('Location: ../index.php');
+            header('Location: ../inici');
             exit();
     }
         }

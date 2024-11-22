@@ -7,7 +7,7 @@ require('../Model/llibres.php');
 // Comprovem si hi ha un ISBN
 if (empty($_GET['isbn'])) {
     $_SESSION['message'] = 'No hi ha cap llibre per modificar';
-    header('Location: ../Vista/index.php');
+    header('Location: ../inici');
     exit(); 
 } else {
     // Obtenim el llibre de la base de dades

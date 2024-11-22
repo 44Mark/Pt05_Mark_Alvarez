@@ -40,7 +40,7 @@ function signup($nom, $correu, $contrasenya, $confirmacio_contrasenya) {
         
         $_SESSION['message'] = "Usuari registrat correctament.";
         
-        header('Location: ../index.php');
+        header('Location: ../inici');
         exit();
     }
 }
@@ -115,7 +115,7 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     $_SESSION['timeout'] = time();
     
     // Redirigimos al usuario a la página principal
-    header('Location: ../index.php');
+    header('Location: ../inici');
     exit();
 }
 
@@ -160,7 +160,7 @@ function canviarContrasenya($antiga, $nova, $repetir) {
     // Actualitzar la contrasenya a la base de dades
     if (actualitzarContrasenya($_SESSION['correu'], $nova_hasheada)) {
         $_SESSION['message'] = "Contrasenya canviada correctament.";
-        header('Location: ../index.php');
+        header('Location: ../inici');
         exit();
     } else {
         $_SESSION['message'] = "Hi ha hagut un problema al canviar la contrasenya.";
@@ -188,7 +188,7 @@ function actualitzarNom($nouNom) {
     if (actualitzarNomUsuari($correu, $nouNom)) {
         $_SESSION['nom'] = $nouNom;
         $_SESSION['message'] = "Nom actualitzat correctament.";
-        header('Location: ../index.php');
+        header('Location: ../inici');
         exit();
     } else {
         $_SESSION['message'] = "Error en actualitzar el nom.";
@@ -224,7 +224,7 @@ function actualitzarFoto($foto) {
     if (actualitzarFotoUsuari($correu, $rutaBD)) {
         $_SESSION['foto'] = $rutaBD;
         $_SESSION['message'] = "Foto actualitzada correctament.";
-        header('Location: ../index.php');
+        header('Location: ../inici');
         exit();
     } else {
         $_SESSION['message'] = "Error en actualitzar la foto.";
@@ -290,7 +290,7 @@ function actualitzarTot($nouNom, $foto) {
 
     // Si tot ha anat bé, redirigir a la pàgina principal
     $_SESSION['message'] = "Nom i foto actualitzats correctament.";
-    header('Location: ../index.php');
+    header('Location: ../inici');
     exit();
 }
 // Función para borrar la foto de perfil
@@ -304,7 +304,7 @@ function borrarFoto() {
         // Eliminar la ruta de la foto de la sesión
         unset($_SESSION['foto']);
         $_SESSION['message'] = "Foto borrada correctament.";
-        header('Location: ../index.php');
+        header('Location: ./inici');
         exit();
     } else {
         $_SESSION['message'] = "Error en borrar la foto.";

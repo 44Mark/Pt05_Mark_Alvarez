@@ -12,7 +12,7 @@ if (empty($_GET['isbn'])) {
     eliminarLlibre($_GET['isbn']);
 
     $_SESSION['message'] = 'Llibre eliminat correctament';
-    header('Location: ../index.php');
+    header('Location: ../inici');
     exit();
 }
 ?>

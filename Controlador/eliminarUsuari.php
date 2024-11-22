@@ -12,7 +12,7 @@ if (empty($_GET['correu'])) {
     eliminarUsuari($_GET['correu']);
 
     $_SESSION['message'] = 'Usuari eliminat correctament';
-    header('Location: ../index.php');
+    header('Location: ../inici');
     exit();
 }
 ?>

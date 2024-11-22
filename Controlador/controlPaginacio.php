@@ -33,7 +33,7 @@ $totalPages = ceil($totalArticles / $articlesPerPage);
 // Verificar si la página solicitada es mayor que el número total de páginas
 if ($page > $totalPages) {
     // Redirigir a la primera página
-    header("Location: ./index.php?page=1");
+    header("Location: /inici?page=1");
     exit();
 }
 

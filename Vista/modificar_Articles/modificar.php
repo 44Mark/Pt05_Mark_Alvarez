@@ -43,7 +43,7 @@ if (!isset($_SESSION['correu'])) {
             <input type="submit" value="Actualitzar" class="button" onclick="return confirm('Estàs segur que vols actualitzar?');">
         </form>
         
-        <button class="button" onclick="window.location.href='./index.php';">Tornar al menú</button>
+        <button class="button" onclick="window.location.href='./inici';">Tornar al menú</button>
 
         <?php
         // Si s'ha enviat el formulari, cridem a la funció comprovactualitzarLlibre
