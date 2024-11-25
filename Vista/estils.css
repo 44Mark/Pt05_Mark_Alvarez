@@ -10,6 +10,7 @@
 @import url(./signup/signup.css);
 @import url(./ordenacio_Articles/ordenacio.css);
 @import url(./vista_Admin/admin.css);
+@import url(./barra_Busqueda/barra.css);
 
 body {
     font-family: Arial, sans-serif;

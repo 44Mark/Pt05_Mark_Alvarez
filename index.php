@@ -22,7 +22,10 @@ include('./Vista/header/header.php');
     <h1>Descobreix i comparteix els teus llibres preferits</h1>
     
     <div class="contenidor-botons">
-        <?php include('./Vista/ordenacio_Articles/ordenacio.php'); ?>	
+        <?php include('./Vista/ordenacio_Articles/ordenacio.php'); ?>
+
+        <?php include('./Vista/barra_Busqueda/barra.php'); ?>
+
         <?php include('./Vista/desplegable_Articles/desplegable.php'); ?>
     </div>
     

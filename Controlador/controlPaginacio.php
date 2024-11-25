@@ -15,6 +15,14 @@ if (!isset($articles)) {
     }
 }
 
+// Filtrar artículos por título si se ha enviado una búsqueda
+if (isset($_GET['search'])) {
+    $searchTerm = htmlspecialchars($_GET['search']);
+    $articles = array_filter($articles, function($art) use ($searchTerm) {
+        return stripos($art['titol'], $searchTerm) !== false;
+    });
+}
+
 // Establecer el número de artículos por página desde la sesión o usar un valor por defecto
 $articlesPerPage = isset($_SESSION['num_escollit']) ? (int)$_SESSION['num_escollit'] : 6;
 
@@ -33,7 +41,7 @@ $totalPages = ceil($totalArticles / $articlesPerPage);
 // Verificar si la página solicitada es mayor que el número total de páginas
 if ($page > $totalPages) {
     // Redirigir a la primera página
-    header("Location: /inici?page=1");
+    header("Location: /inici?page=1" . (isset($searchTerm) ? "&search=" . urlencode($searchTerm) : ""));
     exit();
 }
 
