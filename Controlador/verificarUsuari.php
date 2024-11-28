@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require('../../Model/usuari.php');
+require('../Model/usuari.php');
 require_once('../../env.php');
 
 // Funció per verificar si te tot lo necessari per  fer l'insert
@@ -308,6 +308,49 @@ function borrarFoto() {
         exit();
     } else {
         $_SESSION['message'] = "Error en borrar la foto.";
+    }
+}
+
+// Funció per canviar la contrasenya utilitzant un token
+function canviarContrasenyaToken($nova, $repetir, $ruta) {
+    // Sanititzar inputs
+    $nova = trim(htmlspecialchars($nova));
+    $repetir = trim(htmlspecialchars($repetir));
+
+    // Comprovar si els camps estan buits
+    if (empty($nova) || empty($repetir)) {
+        $_SESSION['message'] = "Els camps no poden estar buits.";
+        header('Location: ' . $ruta);
+        exit();
+    }
+
+    // Comprovar si la nova contrasenya compleix els requisits de seguretat
+    if (!preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/', $nova)) {
+        $_SESSION['message'] = "La contrasenya ha de tenir entre 8 i 16 caràcters, una majúscula, una minúscula, un número i un símbol.";
+        return;
+    }
+
+    // Comprovar si les noves contrasenyes coincideixen
+    if ($nova !== $repetir) {
+        $_SESSION['message'] = "Els camps de nova contrasenya no coincideixen.";
+        return;
+    }
+
+    // Obtenir el correu de l'usuari des del token
+    $token = $_GET['token'];
+    $correu = verificarToken($token);
+
+    // Hash de la nova contrasenya
+    $nova_hasheada = password_hash($nova, PASSWORD_DEFAULT);
+
+    // Actualitzar la contrasenya a la base de dades
+    if (actualitzarContrasenya($correu, $nova_hasheada)) {
+        eliminarToken($token); // Eliminar el token després de canviar la contrasenya
+        $_SESSION['message'] = "Contrasenya canviada correctament.";
+        header('Location: ../inici');
+        exit();
+    } else {
+        $_SESSION['message'] = "Hi ha hagut un problema al canviar la contrasenya.";
     }
 }
 ?>

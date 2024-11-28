@@ -40,7 +40,11 @@ require_once('../../env.php');
             <?php endif; ?>
 
             <input type="checkbox" name="recordar" value="1" <?php echo isset($_POST['recordar']) ? 'checked' : ''; ?>> Recordarme<br>
+            
+            <p>Contrasenya olbidada? <a href="tokenCorreu">Recuperar</a></p>   
+
             <input type="submit" class="button" value="Iniciar sesión">
+            <input type="button" class="button" value="Tornar" onclick="window.location.href='inici'">
         </form>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 

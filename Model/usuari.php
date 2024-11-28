@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../env.php';
 
 require(__DIR__ . '/../Model/connexio.php');
 
@@ -100,5 +101,93 @@ function eliminarUsuari($correu) {
     $stmt->bindParam(':correu', $correu);
     
     return $stmt->execute();
+}
+
+function guardarToken($correu, $token) {
+    global $connexio;
+
+    $sql = "UPDATE usuaris SET tokenPassword = :token WHERE correu = :correu";
+    $stmt = $connexio->prepare($sql);
+    
+    $stmt->bindParam(':correu', $correu);
+    $stmt->bindParam(':token', $token);
+   
+    $stmt->execute();
+}
+
+//Enviar correu
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once __DIR__ . '/../lib/PHPMailer-master/src/PHPMailer.php';
+require_once __DIR__ . '/../lib/PHPMailer-master/src/SMTP.php';
+require_once __DIR__ . '/../lib/PHPMailer-master/src/Exception.php';
+
+function enviarCorreuRecuperacio($correu, $token) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // Configuración del servidor SMTP
+        $mail->isSMTP();
+        $mail->Host = SMTP_HOST;
+        $mail->SMTPAuth = true;
+        $mail->Username = SMTP_USER; 
+        $mail->Password = SMTP_PASS; 
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = SMTP_PORT;
+
+        // Configuración del correo
+        $mail->setFrom(SMTP_USER, 'Nom del projecte');
+        $mail->addAddress($correu); // Dirección del destinatario
+
+        // Contenido del correo
+        $mail->isHTML(true);
+        $mail->Subject = 'Recuperació de contrasenya';
+        $body = file_get_contents(__DIR__ . '/../Vista/login_Token/vistaCorreu.html');
+        $body = str_replace('$token', $token, $body);
+        $mail->Body = $body;
+        $mail->AltBody = "Has sol·licitat recuperar la teva contrasenya. Utilitza aquest enllaç: http://markalvarez.cat/inici?token=$token";
+
+        $mail->send(); // Enviar el correo
+        return true;
+    } catch (Exception $e) {
+        error_log("Error al enviar el correu: {$mail->ErrorInfo}");
+        return false;
+    }
+}
+
+// Funció per trobar l'usuari segons el token
+function verificarToken($token) {
+    global $connexio;
+    
+    $sql = "SELECT correu FROM usuaris WHERE tokenPassword = :token";
+    $stmt = $connexio->prepare($sql);
+    $stmt->bindParam(':token', $token);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $result ? $result['correu'] : false;
+}
+
+// Funció per eliminar el token de l'usuari
+function eliminarToken($token) {
+    global $connexio;
+    
+    $sql = "UPDATE usuari SET tokenPassword = NULL WHERE tokenPassword = :token";  
+    $stmt = $connexio->prepare($sql);
+    $stmt->bindParam(':token', $token);
+}
+
+// Funció per agafar el temps de creació del token
+function obtenirTempsToken($token) {
+    global $connexio;
+    
+    $sql = "SELECT tokenPasswordTime FROM usuaris WHERE tokenPassword = :token";
+    $stmt = $connexio->prepare($sql);
+    $stmt->bindParam(':token', $token);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $result ? $result['tokenPasswordTime'] : false;
 }
 ?>
