@@ -1,6 +1,6 @@
 <?php
 return [
-    'callback' => 'http://localhost/Controlador/hybridAuth.php?provider=GitHub',
+    'callback' => 'http://markalvarez.cat/Controlador/hybridAuth.php?provider=GitHub',
     'providers' => [
         'GitHub' => [
             'enabled' => true,
