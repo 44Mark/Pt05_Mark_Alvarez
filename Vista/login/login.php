@@ -45,6 +45,13 @@ require_once('../../env.php');
 
             <input type="submit" class="button" value="Iniciar sesión">
             <input type="button" class="button" value="Tornar" onclick="window.location.href='inici'">
+
+            <div class="login-container">
+                <a href="../../Controlador/hybridAuth.php?provider=GitHub">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+                        alt="Iniciar sesión con GitHub">
+                </a>
+            </div>
         </form>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 

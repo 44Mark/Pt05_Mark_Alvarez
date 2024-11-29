@@ -105,7 +105,6 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     // Si el usuario seleccionó recordar, guardamos las cookies
     if ($recordar) {
         setcookie('correu', $correu, time() + (86400 * 30), "/");
-        setcookie('contrasenya', $contrasenya, time() + (86400 * 30), "/");
     }
     
     $_SESSION['message'] = "Sesión iniciada correctamente.";
@@ -113,13 +112,13 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     $_SESSION['nom'] = $usuari['nom'];
     $_SESSION['foto'] = $usuari['foto'];
     $_SESSION['timeout'] = time();
+    $_SESSION['HybridAuth'] = false;
+
     
     // Redirigimos al usuario a la página principal
     header('Location: ../inici');
     exit();
 }
-
-
 
 // Funció per canviar la contrasenya
 function canviarContrasenya($antiga, $nova, $repetir) {
@@ -166,7 +165,6 @@ function canviarContrasenya($antiga, $nova, $repetir) {
         $_SESSION['message'] = "Hi ha hagut un problema al canviar la contrasenya.";
     }
 }
-
 
 function actualitzarNom($nouNom) {
     $nouNom = trim(htmlspecialchars($nouNom));

@@ -45,11 +45,14 @@ if (!isset($_SESSION['correu'])) {
                         <input type="text" id="nom" name="nom" required value="<?php echo $_SESSION['nom']; ?>">
                     </div>
 
-                    <!-- Botón para cambiar contraseña -->
-                    <div class="form-group">
-                    <label for="canvi-contrasenya">Canviar Contrasenya:</label>
-                        <button type="button" onclick="window.location.href='canviContrasenya'" class="boton">Canviar contraseña</button>
-                    </div>
+                    <?php if (isset($_SESSION['HybridAuth']) && $_SESSION['HybridAuth'] == false) { ?>
+                        <!-- Botón para cambiar contraseña -->
+                        <div class="form-group">
+                            <label for="canvi-contrasenya">Canviar Contrasenya:</label>
+                            <button type="button" onclick="window.location.href='canviContrasenya'" class="boton">Canviar contrasenya</button>
+                        </div>
+                    <?php } ?>
+
                     <!-- Botón de envío -->
                     <button type="submit" name="action" value="actualizar" class="button">Guardar canvis</button>
                 </form>

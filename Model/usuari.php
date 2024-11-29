@@ -13,7 +13,6 @@ function correuExisteix($correu) {
     $stmt->execute();
     
     return $stmt->fetchColumn() > 0;
-    var_dump($stmt->fetchColumn());
 }
 
 // Funció per obtenir el correu de l'usuari
@@ -173,7 +172,7 @@ function verificarToken($token) {
 function eliminarToken($correu, $token) {
     global $connexio;
     
-    $sql = "UPDATE usuaris SET tokenPassword = NULL WHERE correu = :correu AND tokenPassword = :token";
+    $sql = "UPDATE usuaris SET tokenPassword = NULL, tokenPasswordTime = NULL WHERE correu = :correu AND tokenPassword = :token";
     $stmt = $connexio->prepare($sql);
     $stmt->bindParam(':correu', $correu);
     $stmt->bindParam(':token', $token);
@@ -192,4 +191,17 @@ function obtenirTempsToken($token) {
     
     return $result ? $result['tokenPasswordTime'] : false;
 }
+
+// Funció per fer insert desde HybridAuth
+function insertUsuariHybrid($nom, $correu, $foto, $provider) {
+    global $connexio;
+    
+        $sql = 'INSERT INTO usuaris (nom, correu, foto, hybridAuth) VALUES (:nom, :correu, :foto, :hybridAuth)';
+        $stmt = $connexio->prepare($sql);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':correu', $correu);
+        $stmt->bindParam(':foto', $foto);
+        $stmt->bindParam(':hybridAuth', $provider);
+        $stmt->execute();
+    } 
 ?>
