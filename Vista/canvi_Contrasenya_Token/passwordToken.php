@@ -5,11 +5,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include('../header/header.php');
 
-require('../../Controlador/verificarPasswordToken.php');
-if (!isset($_GET['token'])) {
+
+if (isset($_GET['token'])) {
     $token = $_GET['token'];
 }
-$ruta = "http://localhost/newPasswordToken?token=" . $token;
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $ruta = "http://localhost/newPasswordToken?token=" . $token;
 <body>
     <div class="contrasenya">
         <h2>Canviar Contraseña token</h2>
-        <form action="canviContrasenya" method="POST">
+        <form action=<?="newPasswordToken?token=". $token?> method="POST">
             <div class="form-group">
                 <label for="nova">Nova Contraseña:</label><br>
                 <input type="password" id="nova" name="nova">
@@ -39,7 +39,8 @@ $ruta = "http://localhost/newPasswordToken?token=" . $token;
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require '../../Controlador/verificarUsuari.php';
-            canviarContrasenyaToken($_POST['nova'], $_POST['repetir'], $ruta);
+            
+            canviarContrasenyaToken($_POST['nova'], $_POST['repetir']);
         }
         // Si hi ha un missatge, el mostrem
         if (isset($_SESSION['message'])) {

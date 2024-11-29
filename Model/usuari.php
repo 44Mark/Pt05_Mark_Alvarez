@@ -170,12 +170,14 @@ function verificarToken($token) {
 }
 
 // Funció per eliminar el token de l'usuari
-function eliminarToken($token) {
+function eliminarToken($correu, $token) {
     global $connexio;
     
-    $sql = "UPDATE usuari SET tokenPassword = NULL WHERE tokenPassword = :token";  
+    $sql = "UPDATE usuaris SET tokenPassword = NULL WHERE correu = :correu AND tokenPassword = :token";
     $stmt = $connexio->prepare($sql);
+    $stmt->bindParam(':correu', $correu);
     $stmt->bindParam(':token', $token);
+    $stmt->execute();
 }
 
 // Funció per agafar el temps de creació del token

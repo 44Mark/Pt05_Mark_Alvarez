@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require('../Model/usuari.php');
+require('../../Model/usuari.php');
 require_once('../../env.php');
 
 // Funció per verificar si te tot lo necessari per  fer l'insert
@@ -312,7 +312,7 @@ function borrarFoto() {
 }
 
 // Funció per canviar la contrasenya utilitzant un token
-function canviarContrasenyaToken($nova, $repetir, $ruta) {
+function canviarContrasenyaToken($nova, $repetir) {
     // Sanititzar inputs
     $nova = trim(htmlspecialchars($nova));
     $repetir = trim(htmlspecialchars($repetir));
@@ -320,8 +320,7 @@ function canviarContrasenyaToken($nova, $repetir, $ruta) {
     // Comprovar si els camps estan buits
     if (empty($nova) || empty($repetir)) {
         $_SESSION['message'] = "Els camps no poden estar buits.";
-        header('Location: ' . $ruta);
-        exit();
+        return;
     }
 
     // Comprovar si la nova contrasenya compleix els requisits de seguretat
@@ -345,8 +344,9 @@ function canviarContrasenyaToken($nova, $repetir, $ruta) {
 
     // Actualitzar la contrasenya a la base de dades
     if (actualitzarContrasenya($correu, $nova_hasheada)) {
-        eliminarToken($token); // Eliminar el token després de canviar la contrasenya
+        // eliminarToken($token); // Eliminar el token després de canviar la contrasenya
         $_SESSION['message'] = "Contrasenya canviada correctament.";
+        eliminarToken($correu, $token);
         header('Location: ../inici');
         exit();
     } else {
