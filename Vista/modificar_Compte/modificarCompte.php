@@ -1,10 +1,13 @@
 <?php
+//Vista per poder modificar el compte de l'usuari, pot canviar la foto de perfil, el nom i la contrasenya
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include('../header/header.php');
 
+//Si no esta loguejat l'usuari, el redirigim a l'error 401
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
     exit;

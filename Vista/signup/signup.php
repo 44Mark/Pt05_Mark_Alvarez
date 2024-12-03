@@ -1,4 +1,6 @@
 <?php
+// Vista per que l'usuari es pugi registrar en la nostra pàgina web
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

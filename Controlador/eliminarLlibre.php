@@ -1,4 +1,5 @@
 <?php
+// Controlador creat per eliminar els llibres per l'ISBN
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

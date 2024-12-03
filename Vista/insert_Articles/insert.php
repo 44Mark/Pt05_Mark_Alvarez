@@ -1,10 +1,13 @@
 <?php
+//Vista per poder insertat un llibre
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include('../header/header.php');
 
+// Si no hi ha una sessió iniciada, redirigim a la pàgina d'error401
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
     exit;

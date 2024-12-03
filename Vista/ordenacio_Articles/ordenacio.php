@@ -1,9 +1,11 @@
 <?php
+//Vista per controlar la ordenació dels articles
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Guardar el valor del desplegable en la sesión
+// Guardem el valor en una Sessioj
 if (isset($_POST['orden'])) {
     $_SESSION['orden'] = $_POST['orden'];
 }

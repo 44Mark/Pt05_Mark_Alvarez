@@ -1,10 +1,13 @@
 <?php
+// Vista per canviar la contrasenya de l'usuari, demanem l'antiga contrasenya i la nova
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include('../header/header.php');
 
+// Si no hi ha una sessió iniciada, redirigim a error401
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
     exit;

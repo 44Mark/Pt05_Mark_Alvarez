@@ -1,4 +1,5 @@
 <?php
+// Controlador per a la autenticació amb HybridAuth
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -15,27 +16,28 @@ use Hybridauth\Exception\Exception;
 $config = include('hybridAuth_Controller.php');
 $hybridauth = new Hybridauth($config);
 
-// Detectar el proveedor desde el parámetro GET
+// Agafem el provider que es passa per GET (Google, GitHub, etc.)
 $provider = isset($_GET['provider']) ? $_GET['provider'] : null;
 
 if (!$provider) {
     throw new Exception('Proveedor no especificado.');
 }
 
-// Autenticación con el proveedor
+// Autenticació amb el provider
 $adapter = $hybridauth->authenticate($provider);
 $userProfile = $adapter->getUserProfile();
 
-// Extraer datos del usuario autenticado
+// Extreure les dades de l'usuari
 $nom = $userProfile->displayName;
 $correu = $userProfile->email;
 $foto = $userProfile->photoURL;
 
+// Comprovar si l'usuari ja existeix, sino, l'insertem
 if (!correuExisteix($correu)) {
     insertUsuariHybrid($nom, $correu, $foto, $provider);
 }
 
-// Iniciar sesión con el usuario (crear sesión)
+// Sessions necessaries per poder tenir el funcionament de la BD, i per poder fer el login
 $_SESSION['correu'] = $correu;
 $_SESSION['nom'] = $nom;
 $_SESSION['foto'] = $foto;

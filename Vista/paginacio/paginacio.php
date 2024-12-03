@@ -1,4 +1,6 @@
 <?php
+//Vista per controlar la paginació de la llista de productes
+
 include('./Controlador/controlPaginacio.php');
 ?>
 <section class="paginacio">

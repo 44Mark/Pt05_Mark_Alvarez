@@ -1,4 +1,6 @@
 <?php
+// Vista la qual arrivem després de clicar al link de canviar contrasenya que ens ha arribat per correu
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

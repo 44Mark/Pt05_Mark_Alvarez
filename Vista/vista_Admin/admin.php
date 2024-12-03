@@ -1,4 +1,6 @@
 <?php
+// Vista la qual nomes pot entrar l'administrador, on es mostrara un llistat de tots els usuaris registrats a la pagina web i on els podem eliminar
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

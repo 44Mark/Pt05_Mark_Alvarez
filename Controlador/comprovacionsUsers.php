@@ -1,4 +1,5 @@
 <?php
+// Controlador per comporvar si s'ha iniciat sessió amb l'usuari administrador o no, amb la finalitat de mostrar o no els botons d'administrador
 require('./Model/usuari.php');
 
 $correuadmin = CORREU_ADMIN;

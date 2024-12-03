@@ -1,3 +1,7 @@
+<?php 
+// Vista creada per imprimir els articles guardats en la BD per la variable $articlesToShow que es passa des del controlador segons tots els articles
+// o els de l'usuari quan fa login
+?>
 <div class="articulos">
     <?php foreach ($articlesToShow as $art): ?>
         <div class="articulo">

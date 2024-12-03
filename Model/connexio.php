@@ -1,5 +1,5 @@
 <?php
-// Mark Alvarez
+// Arxiu per connectar-se a la BBDD
 require_once __DIR__ . '/../env.php';
 
 // Connexió a la BBDD

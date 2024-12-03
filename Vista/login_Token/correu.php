@@ -1,4 +1,6 @@
 <?php
+// Vista per demanar el correu i enviar un correu amb el token per recuperar la contrasenya
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

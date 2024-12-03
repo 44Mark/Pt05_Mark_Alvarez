@@ -1,4 +1,5 @@
 <?php
+// Controlador per poder insertar un llibre amb totes les verificacions pertinents
 require('../../Model/llibres.php');
 
 // Comprovem que els camps no estiguin buits i cridem a la funció insertLlibre

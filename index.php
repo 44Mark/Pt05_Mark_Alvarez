@@ -1,4 +1,7 @@
 <?php
+//L'index es la vista principal de la pàgina web, on es mostren els llibres i es poden fer cerques, ordenar-los i filtrar-los. Tot aixó de forma
+// modular cridant a altres vista fent un include de les mateixes.
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

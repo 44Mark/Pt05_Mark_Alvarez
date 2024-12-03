@@ -1,4 +1,6 @@
 <?php
+// Controlador per poder modificar un Llibre, primerament amb comprovmodificarLlibre.php hem imprimir les dades, ara les podem editar i al donar-li
+// a modificar farem les comprovacions necessaries per poder fer l'Update
 require('../../Model/llibres.php');
 
 // Comprovem que els camps no estiguin buits i cridem a la funció insertLlibre
@@ -12,6 +14,7 @@ function comprovactualitzarLlibre($isbn, $titol, $cos, $correu) {
     if (empty($isbn)) {
         $_SESSION['message'] = 'El isbn no pot estar buit';
         return;
+    // Comprovem si el camp titol esta buit
     } else if (empty($titol)) {
         $_SESSION['message'] = 'El titol no pot estar buit';
         return;

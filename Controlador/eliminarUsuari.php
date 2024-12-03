@@ -1,4 +1,5 @@
 <?php
+// Controlador per eliminar un usuari pel correu
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

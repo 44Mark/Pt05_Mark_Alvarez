@@ -1,14 +1,16 @@
 <?php
+// Vista per que l'usuari pugui escollir el nombre d'articles que vol veure per pàgina
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Guardar el valor del desplegable en la sesión
+// Guardem el valor del desplegable en una Session
 if (isset($_POST['num_escollit'])) {
     $_SESSION['num_escollit'] = $_POST['num_escollit'];
 }
 
-// Establecer el valor por defecto si no está definido
+// Si entra per primer cop el valor predefinit es 6 articles per pàgina
 if (!isset($_SESSION['num_escollit'])) {
     $_SESSION['num_escollit'] = 6;
 }

@@ -1,4 +1,6 @@
 <?php
+// Vista per poder iniciar Sessió
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -9,6 +11,7 @@ if (!isset($_SESSION['login_intents'])) {
     $_SESSION['login_intents'] = 0;
 }
 
+//Cridem al env on tenim les dades privades de les claus del Recaptcha
 require_once('../../env.php');
 ?>
 
@@ -34,7 +37,7 @@ require_once('../../env.php');
                 <input type="password" name="contrasenya" value="<?php echo isset($_POST['contrasenya']) ? htmlspecialchars($_POST['contrasenya']) : ''; ?>">
             </div>
 
-            <!-- ReCAPTCHA: Solo se muestra si hay más de 3 intentos fallidos -->
+            <!-- ReCAPTCHA: Si hi ha mes de 3 errors -->
             <?php if ($_SESSION['login_intents'] >= 3): ?>
                 <div class="g-recaptcha" data-sitekey=<?= CLAU_PUBLICA?> required></div>
             <?php endif; ?>
@@ -56,11 +59,10 @@ require_once('../../env.php');
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
         <?php
-            // Si se ha enviado el formulario, llamamos a la función login
+            // Si s'ha enviat les dades cridarem a la funció login
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 require '../../Controlador/verificarUsuari.php';
                 $recordar = isset($_POST['recordar']) ? true : false;
-                // Se pasa el valor de g-recaptcha-response directamente
                 login($_POST['correu'], $_POST['contrasenya'], $recordar, $_POST['g-recaptcha-response']);
             }
 

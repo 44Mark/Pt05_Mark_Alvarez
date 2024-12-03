@@ -1,4 +1,6 @@
 <?php
+//Controlador creat per a totes les funcions necessaries per gestionar l'usuari
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -6,7 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require('../../Model/usuari.php');
 require_once('../../env.php');
 
-// Funció per verificar si te tot lo necessari per  fer l'insert
+// Funció per verificar si te tot lo necessari per  crear l'usuari al registrar-se
 function signup($nom, $correu, $contrasenya, $confirmacio_contrasenya) {
     $nom = trim(htmlspecialchars($nom));
     $correu = trim(htmlspecialchars($correu));
@@ -45,22 +47,24 @@ function signup($nom, $correu, $contrasenya, $confirmacio_contrasenya) {
     }
 }
 
-// Funció per verificar si te tot lo necessari per fer el login
+// Funció per verificar si te tot lo necessari per fer el login a la pàgina web
 function login($correu, $contrasenya, $recordar, $recaptcha_response) {
     $correu = trim(htmlspecialchars($correu));
     $contrasenya = trim(htmlspecialchars($contrasenya));
 
-    // Comprobamos si el campo correo está vacío
+    // Comprovar si el correu esta buit
     if (empty($correu)) {
         $_SESSION['login_intents']++;
         $_SESSION['message'] = "El campo correo está vacío.";
         header('Location: login'); 
         exit();
+    // Comprovar si la contrasenya esta buida
     } else if (empty($contrasenya)) {
         $_SESSION['login_intents']++;
         $_SESSION['message'] = "El campo contraseña está vacío.";
         header('Location: login'); 
         exit();
+    // Comprovem si el correu existex a la BD
     } else if (!correuExisteix($correu)) {
         $_SESSION['login_intents']++;
         $_SESSION['message'] = "El correo no existe.";
@@ -68,17 +72,18 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
         exit();
     }
 
-    // Si el número de intentos fallidos es 3 o más, verificamos el reCAPTCHA
+    // Si el numero de errors es de 3 o mes sortira el recaptcha
     if ($_SESSION['login_intents'] >= 3) {
-        // Verificar la respuesta del reCAPTCHA
+        
+        // Definim la clau privada i l'url de verificació de Google
         $secret_key = CLAU_PRIVADA;
         $verify_url = "https://www.google.com/recaptcha/api/siteverify";
         
-        // Creamos la solicitud a Google con los parámetros necesarios
+        // Creem la solicitud amb la clau privada i la resposta del recaptcha
         $response = file_get_contents($verify_url . "?secret=" . $secret_key . "&response=" . $recaptcha_response);
         $response_keys = json_decode($response, true);
         
-        // Si el reCAPTCHA no es válido, mostramos un error
+        // Verificació per saber si a passat el recaptcha
         if (intval($response_keys["success"]) !== 1) {
             $_SESSION['login_intents']++;
             $_SESSION['message'] = "Por favor, verifica el reCAPTCHA.";
@@ -87,10 +92,10 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
         }
     }
 
-    // Si todo está correcto, llamamos a obtenerUsuari para obtener los datos del usuario
+    // Si tot esta correcte cridarem a obtenirUsuari per agafar les dades de l'usuari
     $usuari = obtenirUsuari($correu);
     
-    // Comprobamos si la contraseña es correcta
+    // Comprovem si la password es correcte
     if (!password_verify($contrasenya, $usuari['contrasenya'])) {
         $_SESSION['login_intents']++;
         $_SESSION['message'] = "Contraseña incorrecta.";
@@ -98,20 +103,27 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
         exit();
     }
 
-    // Si la contraseña es correcta, reiniciamos el contador de intentos y desactivamos el reCAPTCHA
+    // Si la password es correcte reiniciem el recaptcha
     $_SESSION['login_intents'] = 0;
     $_SESSION['show_recaptcha'] = false; 
 
-    // Si el usuario seleccionó recordar, guardamos las cookies
+    // Si li dona a remember-me guardarem el correu a la cookie
     if ($recordar) {
         setcookie('correu', $correu, time() + (86400 * 30), "/");
     }
     
+    // Creem les sessions necessaries per a l'usuari en la pàgina web
+    // Missatge de confirmació d'inici de sessió
     $_SESSION['message'] = "Sesión iniciada correctamente.";
+    // Gurdem el correu
     $_SESSION['correu'] = $usuari['correu'];
+    // Guardem el nom
     $_SESSION['nom'] = $usuari['nom'];
+    // Guardem la foto
     $_SESSION['foto'] = $usuari['foto'];
+    // Guardem el temps de la sessió
     $_SESSION['timeout'] = time();
+    // Diem que no ha iniciar sessió amb Hybrid Auth
     $_SESSION['HybridAuth'] = false;
 
     
@@ -122,7 +134,7 @@ function login($correu, $contrasenya, $recordar, $recaptcha_response) {
 
 // Funció per canviar la contrasenya
 function canviarContrasenya($antiga, $nova, $repetir) {
-    // Sanititzar inputs
+    
     $antiga = trim(htmlspecialchars($antiga));
     $nova = trim(htmlspecialchars($nova));
     $repetir = trim(htmlspecialchars($repetir));
@@ -145,6 +157,7 @@ function canviarContrasenya($antiga, $nova, $repetir) {
         return;
     }
     
+    // Si tot esta correcte cridarem a obtenirUsuari per agafar les dades de l'usuari
     $usuari = obtenirUsuari($_SESSION['correu']);
 
     // Comprovar si la contrasenya antiga és correcta
@@ -166,6 +179,7 @@ function canviarContrasenya($antiga, $nova, $repetir) {
     }
 }
 
+// Funció per canviar el nom de l'usuari
 function actualitzarNom($nouNom) {
     $nouNom = trim(htmlspecialchars($nouNom));
 
@@ -193,6 +207,7 @@ function actualitzarNom($nouNom) {
     }
 }
 
+// Funció per actualitzar la foto de perfil
 function actualitzarFoto($foto) {
     // Comprovar si hi ha un error en la pujada de la foto
     if ($foto['error'] !== UPLOAD_ERR_OK) {
@@ -200,7 +215,7 @@ function actualitzarFoto($foto) {
         return;
     }
 
-    // Comprovar el tipus de fitxer
+    // Controlar que la foto sigui jpeg o png
     $allowedTypes = ['image/jpeg', 'image/png'];
     if (!in_array($foto['type'], $allowedTypes)) {
         $_SESSION['message'] = "Només es permeten fitxers JPEG i PNG.";
@@ -214,11 +229,11 @@ function actualitzarFoto($foto) {
         return;
     }
 
-    // Ajustar la ruta para la base de datos
+    // Ajustar la ruta per a la BD
     $rutaBD = '../../Vista/assets/fotosUsuaris/' . basename($foto['name']);
 
-    // Actualitzar la ruta de la foto a la base de dades
-    $correu = $_SESSION['correu']; // Usar el correo almacenado en la sesión
+    // Guardar la ruta de la foto a la BD
+    $correu = $_SESSION['correu'];
     if (actualitzarFotoUsuari($correu, $rutaBD)) {
         $_SESSION['foto'] = $rutaBD;
         $_SESSION['message'] = "Foto actualitzada correctament.";
@@ -229,6 +244,7 @@ function actualitzarFoto($foto) {
     }
 }
 
+// Funció per actualitzar el nom i la foto de perfil a la vegada
 function actualitzarTot($nouNom, $foto) {
     $nouNom = trim(htmlspecialchars($nouNom));
 
@@ -291,9 +307,10 @@ function actualitzarTot($nouNom, $foto) {
     header('Location: ../inici');
     exit();
 }
-// Función para borrar la foto de perfil
+
+// Función per eliminar la foto de perfil
 function borrarFoto() {
-    $correu = $_SESSION['correu']; // Usar el correo almacenado en la sesión
+    $correu = $_SESSION['correu'];
     if (actualitzarFotoUsuari($correu, null)) {
         // Eliminar la foto del servidor
         if (file_exists($_SESSION['foto'])) {

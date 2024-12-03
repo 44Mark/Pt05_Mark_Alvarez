@@ -1,4 +1,5 @@
 <?php
+// Controlador per quan li dona a modificar un article agafant l'ISBN i totes les dades per poder imprimir-les a la vista de modificar
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,7 +20,7 @@ if (empty($_GET['isbn'])) {
     $_SESSION['titol'] = $llibre['titol'];
     $_SESSION['cos'] = $llibre['cos'];
 
-    // Redirigim a la vista de modificació amb les dades del llibre
+    // Redirigim a la vista de modificació amb les dades del llibre per poder modificar-les
     header('Location: ../modificar');
     exit();
 }

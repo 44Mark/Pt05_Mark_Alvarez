@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../env.php';
+// Model per gestionar totes les funcions relacionades amb els usuaris
 
+require_once __DIR__ . '/../env.php';
 require(__DIR__ . '/../Model/connexio.php');
 
 // Funció per verificar si el correu ja existeix a la BD
@@ -102,6 +103,7 @@ function eliminarUsuari($correu) {
     return $stmt->execute();
 }
 
+// Funció per guardar el token de recuperació de contrasenya en la base de dades
 function guardarToken($correu, $token) {
     global $connexio;
 
@@ -135,11 +137,11 @@ function enviarCorreuRecuperacio($correu, $token) {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = SMTP_PORT;
 
-        // Configuración del correo
+        // Configuració del correu
         $mail->setFrom(SMTP_USER, 'Nom del projecte');
-        $mail->addAddress($correu); // Dirección del destinatario
+        $mail->addAddress($correu); // Direcció del destinatari
 
-        // Contenido del correo
+        // Contingut del correu
         $mail->isHTML(true);
         $mail->Subject = 'Recuperació de contrasenya';
         $body = file_get_contents(__DIR__ . '/../Vista/login_Token/vistaCorreu.html');
@@ -147,7 +149,7 @@ function enviarCorreuRecuperacio($correu, $token) {
         $mail->Body = $body;
         $mail->AltBody = "Has sol·licitat recuperar la teva contrasenya. Utilitza aquest enllaç: http://markalvarez.cat/inici?token=$token";
 
-        $mail->send(); // Enviar el correo
+        $mail->send(); // Enviar el correu
         return true;
     } catch (Exception $e) {
         error_log("Error al enviar el correu: {$mail->ErrorInfo}");
