@@ -15,9 +15,7 @@ Aquest projecte és una aplicació web per gestionar llibres i usuaris en una ba
   - PHPMailer per enviar correus electrònics.  
   - HybridAuth per a l’autenticació social.  
 
-
-
-# Estructura del projecte
+# 📂 Estructura del projecte
 <pre>
 C:.
 │   .gitignore
@@ -61,19 +59,12 @@ C:.
     │
     ├───assets
     │   ├───fotosUsuaris
-    │   │       a.png
-    │   │       dios.jpg
-    │   │       Horari.jpg
-    │   │       mono.jpg
-    │   │       sazed.jpg
-    │   │       sazed1.jpeg
+    │   │       FotoUsuari_1
+    │   │       FotoUsuari_2 ...
     │   │
     │   └───images-work
-    │           bibl.jpg
-    │           eliminar.png
-    │           logo.png
-    │           lupa.png
-    │           modificar.png
+    │           BackGround
+    │           Logos ...
     │
     ├───barra_Busqueda
     │       barra.css
@@ -139,11 +130,11 @@ C:.
             admin.php
 </pre>
 
-## Model - Vista - Controlador (MVC)  
+## 🏗️ Model - Vista - Controlador (MVC)  
 
 El projecte està desenvolupat seguint l'arquitectura **Model-Vista-Controlador (MVC)**, que permet organitzar el codi en tres components principals:  
 
-- **Model**  
+- **🔧 Model**  
   - Gestiona la interacció amb la base de dades.  
   - S'encarrega de les operacions de CRUD:  
     - **C**rear (inserir dades).  
@@ -152,12 +143,12 @@ El projecte està desenvolupat seguint l'arquitectura **Model-Vista-Controlador 
     - **D**elete (eliminar dades).  
   - Garanteix una comunicació eficient i segura amb la base de dades.  
 
-- **Vista**  
+- **🌐 Vista**  
   - Responsable de mostrar les dades a l'usuari final.  
   - Genera la interfície d'usuari de manera visual i intuïtiva.  
   - Rep la informació del controlador i la presenta de forma clara.  
 
-- **Controlador**  
+- **🧑‍💻 Controlador**  
   - Actua com a intermediari entre el model i la vista.  
   - Gestiona la lògica de negoci i les verificacions necessàries.  
   - Processa les sol·licituds de l'usuari i determina la resposta adequada.  
@@ -182,8 +173,7 @@ A l'arrel del projecte hi trobem:
 
 Aquesta estructura permet mantenir el codi organitzat, escalable i fàcil de gestionar.  
 
-
-## Model
+## 🧩 Model
 
 Model conté un total de tres arxius:
 - **`connexio.php`**: Configura la connexió amb la base de dades. Utilitza PDO per establir una connexió segura i estable amb la base de dades.
@@ -199,7 +189,7 @@ Model conté un total de tres arxius:
   
   - **`comprovarLlibre($isbn)`**: Comprova si un llibre amb un ISBN determinat ja existeix a la base de dades. Retorna un registre associat amb el llibre si existeix, o `false` si no es troba.
   
-  - **`obtenirLlibre($isbn)`**: Obté un llibre específic de la base de dades mitjançant el seu ISBN. Retorna el registre associat amb aquest ISBN.
+   - **`obtenirLlibre($isbn)`**: Obté un llibre específic de la base de dades mitjançant el seu ISBN. Retorna el registre associat amb aquest ISBN.
   
   - **`actualitzarLlibre($isbn, $titol, $cos)`**: Actualitza les dades d'un llibre a la base de dades utilitzant l'ISBN com a identificador. Permet actualitzar el títol i la descripció (cos) del llibre especificat.
   
@@ -238,7 +228,7 @@ Model conté un total de tres arxius:
   - **`insertUsuariHybrid($nom, $correu, $foto, $provider)`**: Insereix un nou usuari mitjançant un proveïdor d'autenticació externa (com GitHub o Google). Es desaran el nom, correu, foto i el proveïdor d'autenticació.
 
 
-## Controlador
+## ⚙️ Controlador
 
 - **`comprovacionsToken.php`**: Valida el correu electrònic, genera un token i envia un correu amb el token per a la recuperació de la contrasenya.
   
@@ -318,7 +308,7 @@ Funció per actualitzar tant el nom com la foto de perfil de l'usuari:
 - Actualitza tant el nom com la foto a la base de dades i a la sessió.
 
 
-## Vista
+## 👀 Vista
 
 Dins de la carpeta **Vista**, hi ha una estructura organitzada en carpetes per mantenir el projecte net i modular. Aquesta organització permet gestionar millor els estils i optimitzar la càrrega del CSS en cada pàgina.
 
@@ -357,7 +347,7 @@ Cadascuna de les vistes s'encarrega de gestionar les dades de l'usuari:
 - Envia informació mitjançant **mètodes POST o GET** per ser validada al controlador.
 - Això garanteix una interacció segura i eficient amb la pàgina web, permetent validar, processar i retornar respostes o missatges personalitzats segons sigui necessari.
 
-## Seguretat
+## 🔒 Seguretat
 
 La seguretat és una part fonamental del projecte, i per això s'han implementat diverses mesures per protegir tant la funcionalitat com la informació del sistema.
 
@@ -387,3 +377,13 @@ S'han configurat respostes personalitzades per als següents errors HTTP:
 - **Control d'accés**: Es limita l'accés a determinades parts del projecte basant-se en permisos.
 - **Experiència d'usuari millorada**: Les pàgines d'error personalitzades proporcionen informació clara en cas de problemes.
 - **Seguretat millorada**: Es redueix la possibilitat d'explotació de rutes o fitxers visibles no autoritzats.
+
+## 👥 Usuaris
+**Administrador**  
+Correu electrònic: `admin@super.cat`  
+Contrasenya: Veure al comentari de Moodle.
+
+---
+
+## 🌐 Pàgina Web
+La pàgina web està disponible a [markalvarez.cat](https://markalvarez.cat)
