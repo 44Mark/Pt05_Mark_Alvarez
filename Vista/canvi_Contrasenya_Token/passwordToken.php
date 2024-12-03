@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 include('../header/header.php');
-
+require_once '../../Controlador/verificarPasswordToken.php';
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
