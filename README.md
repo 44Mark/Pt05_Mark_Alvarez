@@ -18,7 +18,7 @@ Aquest projecte és una aplicació web per gestionar llibres i usuaris en una ba
 # 📂 Estructura del projecte
 <pre>
 C:.
-│   .gitignore
+│   vendor
 │   .htaccess
 │   env.php
 │   index.php
@@ -42,9 +42,6 @@ C:.
 │       verificarPasswordToken.php
 │       verificarUsuari.php
 │       
-├───lib
-│   ├───hybridauth-3.11.0
-│   └───PHPMailer-master
 ├───Model
 │       connexio.php
 │       llibres.php
@@ -163,10 +160,9 @@ A l'arrel del projecte hi trobem:
   - **Model**: Conté els arxius responsables de la comunicació amb la base de dades.  
   - **Vista**: Inclou les plantilles i els arxius necessaris per mostrar la informació a l'usuari.  
   - **Controlador**: Gestiona la lògica de l'aplicació i les sol·licituds dels usuaris.  
-  - **Lib**: Emmagatzema les llibreries necessàries, com **PHPMailer** per a l'enviament de correus i **HybridAuth** per a l'autenticació social.  
+  - **Vendor**: Carpeta on gràcies al composer, hem pogut instal.lar tots els arxius necessaris per el PHPMailer, HybridAuth i OAuth 
 
-- **4 arxius**:  
-  - **`.gitignore`**: Assegura que certs fitxers sensibles o innecessaris no es pugin al repositori de GitHub.  
+- **3 arxius**:  
   - **`.htaccess`**: Utilitzat per a gestionar rutes amigables, redirigir en cas d'errors i enmascarar les rutes del projecte.  
   - **`env.php`**: Emmagatzema informació sensible com usuaris, contrasenyes o claus d'accés de manera segura.  
   - **`index.php`**: L'arxiu principal del projecte, que importa modularment les vistes necessàries per mostrar contingut a l'usuari de la pàgina web.  
