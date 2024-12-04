@@ -1,9 +1,11 @@
 <?php
+// Model per fer totes les funcions relacionades amb els llibres
 require __DIR__ . '/../Model/connexio.php';
 
 // Funció per fer un select de tots els articles al menu per a qualsevol usuari
 function obtenirArticles() {
     global $connexio;
+
     $stmt = $connexio->prepare("SELECT * FROM taula_articles");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -13,7 +15,7 @@ function obtenirArticles() {
 function obtenirArticlesUsuari($correuUsuari) {
     global $connexio;
 
-    // Obtener los artículos del usuario usando su correo
+    // Obtenir els articles pel correu de l'usuari
     $stmt = $connexio->prepare("SELECT * FROM taula_articles WHERE correu_usuari = :correuUsuari");
     $stmt->bindParam(':correuUsuari', $correuUsuari);
     $stmt->execute();
@@ -25,7 +27,6 @@ function obtenirArticlesUsuari($correuUsuari) {
 function insertLlibre($isbn, $titol, $cos, $correuUsuari) {
     global $connexio;
 
-    // Insertar el artículo en la base de datos
     $stmt = $connexio->prepare("INSERT INTO taula_articles (isbn, titol, cos, correu_usuari) VALUES (:isbn, :titol, :cos, :correuUsuari)");
     $stmt->bindParam(':isbn', $isbn);
     $stmt->bindParam(':titol', $titol);
@@ -34,11 +35,10 @@ function insertLlibre($isbn, $titol, $cos, $correuUsuari) {
     $stmt->execute();
 }
 
-// Funció per eliminar el llibre 
+// Funció per eliminar el llibre per l'isbn
 function eliminarLlibre($isbn) {
     global $connexio;
 
-    // Eliminar el llibre de la base de dades
     $stmt = $connexio->prepare("DELETE FROM taula_articles WHERE isbn = :isbn");
     $stmt->bindParam(':isbn', $isbn);
     $stmt->execute();
@@ -48,7 +48,6 @@ function eliminarLlibre($isbn) {
 function comprovarLlibre($isbn) {
     global $connexio;
 
-    // Comprovar si ja existeix un llibre amb aquest isbn
     $stmt = $connexio->prepare("SELECT * FROM taula_articles WHERE isbn = :isbn");
     $stmt->bindParam(':isbn', $isbn);
     $stmt->execute();
@@ -60,7 +59,6 @@ function comprovarLlibre($isbn) {
 function obtenirLlibre($isbn) {
     global $connexio;
 
-    // Obtenir el llibre per l'isbn
     $stmt = $connexio->prepare("SELECT * FROM taula_articles WHERE isbn = :isbn");
     $stmt->bindParam(':isbn', $isbn);
     $stmt->execute();
@@ -72,7 +70,6 @@ function obtenirLlibre($isbn) {
 function actualitzarLlibre($isbn, $titol, $cos) {
     global $connexio;
 
-    // Actualitzar el llibre
     $stmt = $connexio->prepare("UPDATE taula_articles SET titol = :titol, cos = :cos WHERE isbn = :isbn");
     $stmt->bindParam(':isbn', $isbn);
     $stmt->bindParam(':titol', $titol);
@@ -80,4 +77,31 @@ function actualitzarLlibre($isbn, $titol, $cos) {
     $stmt->execute();
 }
 
-?>
+// Funció per obtenir els llibres ordenats ascendentment
+function obtenirArticlesAsc($correu = null) {
+    global $connexio;
+    
+    if ($correu) {
+        $stmt = $connexio->prepare("SELECT * FROM taula_articles WHERE correu_usuari = :correu ORDER BY titol ASC");
+        $stmt->bindParam(':correu', $correu);
+    } else {
+        $stmt = $connexio->prepare("SELECT * FROM taula_articles ORDER BY titol ASC");
+    }
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Funció per obtenir els llibres ordenats descendentment
+function obtenirArticlesDesc($correu = null) {
+    global $connexio;
+    
+    if ($correu) {
+        $stmt = $connexio->prepare("SELECT * FROM taula_articles WHERE correu_usuari = :correu ORDER BY titol DESC");
+        $stmt->bindParam(':correu', $correu);
+    } else {
+        $stmt = $connexio->prepare("SELECT * FROM taula_articles ORDER BY titol DESC");
+    }
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?> 

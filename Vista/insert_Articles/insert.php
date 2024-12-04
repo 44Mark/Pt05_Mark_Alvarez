@@ -1,10 +1,13 @@
 <?php
+//Vista per poder insertat un llibre
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include('../header/header.php');
 
+// Si no hi ha una sessió iniciada, redirigim a la pàgina d'error401
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
     exit;
@@ -17,6 +20,7 @@ if (!isset($_SESSION['correu'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Llibre</title>
+    <link rel="stylesheet" href="../../Vista/estils.css">
 </head>
 <body>
     <h1 class="fons">Inserció de Llibres</h1>

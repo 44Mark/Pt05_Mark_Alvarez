@@ -1,4 +1,5 @@
 <?php
+// Controlador per a la gestió del timeout de la sessió de l'usuari
 if (session_status() == PHP_SESSION_NONE) {
     // Durada de 40 minuts
     ini_set('session.gc_maxlifetime', 2400);
@@ -13,7 +14,7 @@ if (isset($_SESSION['timeout'])) {
         session_unset();
         session_destroy();
         $_SESSION['message'] = "Sessió finalitzada per inactivitat durant 40 minuts";
-        header("Location: ../index.php");
+        header("Location: ../inici");
         exit();
     }
 }

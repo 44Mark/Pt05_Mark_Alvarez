@@ -1,10 +1,13 @@
 <?php
+//Vista per poder modificar el compte de l'usuari, pot canviar la foto de perfil, el nom i la contrasenya
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 include('../header/header.php');
 
+//Si no esta loguejat l'usuari, el redirigim a l'error 401
 if (!isset($_SESSION['correu'])) {
     header('Location: error401');
     exit;
@@ -17,6 +20,7 @@ if (!isset($_SESSION['correu'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Compte</title>
+    <link rel="stylesheet" href="../../Vista/estils.css">
 </head>
 <body>
     <div class="contenedor-central-modificar">
@@ -44,11 +48,14 @@ if (!isset($_SESSION['correu'])) {
                         <input type="text" id="nom" name="nom" required value="<?php echo $_SESSION['nom']; ?>">
                     </div>
 
-                    <!-- Botón para cambiar contraseña -->
-                    <div class="form-group">
-                    <label for="canvi-contrasenya">Canviar Contrasenya:</label>
-                        <button type="button" onclick="window.location.href='canviContrasenya'" class="boton">Canviar contraseña</button>
-                    </div>
+                    <?php if (isset($_SESSION['HybridAuth']) && $_SESSION['HybridAuth'] == false) { ?>
+                        <!-- Botón para cambiar contraseña -->
+                        <div class="form-group">
+                            <label for="canvi-contrasenya">Canviar Contrasenya:</label>
+                            <button type="button" onclick="window.location.href='canviContrasenya'" class="boton">Canviar contrasenya</button>
+                        </div>
+                    <?php } ?>
+
                     <!-- Botón de envío -->
                     <button type="submit" name="action" value="actualizar" class="button">Guardar canvis</button>
                 </form>

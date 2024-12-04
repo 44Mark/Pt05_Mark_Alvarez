@@ -1,4 +1,4 @@
-@import url(./num_Articles/desplegament.css);
+@import url(./desplegable_Articles/desplegable.css);
 @import url(./paginacio/paginacio.css);
 @import url(./header/header.css);
 @import url(./articles/articles.css);
@@ -8,6 +8,9 @@
 @import url(./canvi_Contrasenya/canviContrasenya.css);
 @import url(./modificar_Compte/modificarCompte.css);
 @import url(./signup/signup.css);
+@import url(./ordenacio_Articles/ordenacio.css);
+@import url(./vista_Admin/admin.css);
+@import url(./barra_Busqueda/barra.css);
 
 body {
     font-family: Arial, sans-serif;
@@ -53,4 +56,11 @@ h2 {
     text-align: center;
     background-color: #f9f9f9;
     border-radius: 10px;
+}
+
+.contenidor-botons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
 }

@@ -1,4 +1,6 @@
 <?php
+// Vista per que l'usuari es pugi registrar en la nostra pàgina web
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -12,6 +14,7 @@ include('../header/header.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar-se</title>
+    <link rel="stylesheet" href="../../Vista/estils.css">
 </head>
 <body>
     <div class="registrar">

@@ -1,21 +1,16 @@
 <?php
+//L'index es la vista principal de la pàgina web, on es mostren els llibres i es poden fer cerques, ordenar-los i filtrar-los. Tot aixó de forma
+// modular cridant a altres vista fent un include de les mateixes.
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 require_once('./Model/connexio.php'); 
 require('./Model/llibres.php');
-require('./Model/usuari.php');
-require('./Controlador/timeout.php');
 
-// Si la sessió correu està definida, significa que l'usuari està autenticat
-if (isset($_SESSION['correu'])) {
-    $_SESSION['usuari_autenticat'] = true;
-} else {
-    $_SESSION['usuari_autenticat'] = false;
-}
-
-// Navbar
+// Comprovacions d'usuaris
+include('./Controlador/comprovacionsUsers.php');
 include('./Vista/header/header.php');
 ?>
 
@@ -23,13 +18,20 @@ include('./Vista/header/header.php');
 <html lang="es">
 <head>
     <title>Artículos</title>
+    <link rel="stylesheet" href="./Vista/estils.css">
 </head>
 <body>
 <div class="contenedor-central">
     <h1>Descobreix i comparteix els teus llibres preferits</h1>
     
-    <?php include('./Vista/num_Articles/desplegable.php'); ?>
+    <div class="contenidor-botons">
+        <?php include('./Vista/ordenacio_Articles/ordenacio.php'); ?>
 
+        <?php include('./Vista/barra_Busqueda/barra.php'); ?>
+
+        <?php include('./Vista/desplegable_Articles/desplegable.php'); ?>
+    </div>
+    
     <?php include('./Vista/articles/articles.php'); ?>
 
     <?php include_once('./Vista/paginacio/paginacio.php'); ?>

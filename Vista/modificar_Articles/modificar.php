@@ -1,4 +1,5 @@
 <?php
+// Vista per poder modificar un llibre
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -17,6 +18,7 @@ if (!isset($_SESSION['correu'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Llibre</title>
+    <link rel="stylesheet" href="../../Vista/estils.css">
 </head>
 <body>
 <h1 class="fons">Modificació de Llibres</h1>
@@ -42,7 +44,7 @@ if (!isset($_SESSION['correu'])) {
             <input type="submit" value="Actualitzar" class="button" onclick="return confirm('Estàs segur que vols actualitzar?');">
         </form>
         
-        <button class="button" onclick="window.location.href='./index.php';">Tornar al menú</button>
+        <button class="button" onclick="window.location.href='./inici';">Tornar al menú</button>
 
         <?php
         // Si s'ha enviat el formulari, cridem a la funció comprovactualitzarLlibre
