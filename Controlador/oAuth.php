@@ -13,7 +13,7 @@ use League\OAuth2\Client\Provider\Google;
 // Reemplaza estos valores por los que Google te proporcionó
 $clientID = GOOGLE_CLIENT_ID;
 $clientSecret = GOOGLE_CLIENT_SECRET;
-$redirectUri = 'https://markalvarez.cat/Controlador/oAuth.php';
+$redirectUri = "https://markalvarez.cat/Controlador/oAuth.php";
 
 $variable = new Google([
     'clientId' => $clientID,
