@@ -4,16 +4,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once '../lib/hybridauth-3.11.0/src/autoload.php';
+require_once '../vendor/autoload.php';
 require_once '../env.php';
 require '../Model/usuari.php';
 
 use Hybridauth\Hybridauth;
-use Hybridauth\HttpClient;
 use Hybridauth\Exception\Exception;
 
 
-$config = include('hybridAuth_Oauth_Controller.php');
+$config = include('hybridAuth_Controller.php');
 $hybridauth = new Hybridauth($config);
 
 // Agafem el provider que es passa per GET (Google, GitHub, etc.)

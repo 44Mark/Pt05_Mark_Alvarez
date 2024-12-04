@@ -55,7 +55,7 @@ require_once('../../env.php');
                     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Iniciar sesión con GitHub">
                 </a>
                 <!-- Botón para iniciar sesión con Google -->
-                <a href="../../Controlador/hybridAuth.php?provider=Google">
+                <a href="../../Controlador/oAuth.php">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/150px-Google_%22G%22_logo.svg.png" alt="Iniciar sesión con Google">
                 </a>
             </div>

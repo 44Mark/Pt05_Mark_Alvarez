@@ -1,11 +1,14 @@
 <?php
 //Controlador creat per a totes les funcions necessaries per gestionar l'usuari
 
+use Google\Service\Script\ScriptFile;
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-require('../../Model/usuari.php');
+if (mb_split("/", $_SERVER['SCRIPT_NAME'])[3] != 'passwordToken.php') {
+    require('../../Model/usuari.php');
+}
 require_once('../../env.php');
 
 // Funció per verificar si te tot lo necessari per  crear l'usuari al registrar-se

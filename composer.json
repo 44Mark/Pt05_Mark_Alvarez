@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.9",
+        "hybridauth/hybridauth": "^3.11",
+        "league/oauth2-google": "^4.0"
+    }
+}

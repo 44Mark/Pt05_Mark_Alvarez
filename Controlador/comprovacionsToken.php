@@ -3,7 +3,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require('../Model/usuari.php'); 
+require_once '../Model/usuari.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
