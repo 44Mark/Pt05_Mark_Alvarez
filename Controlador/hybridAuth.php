@@ -13,7 +13,7 @@ use Hybridauth\HttpClient;
 use Hybridauth\Exception\Exception;
 
 
-$config = include('hybridAuth_Controller.php');
+$config = include('hybridAuth_Oauth_Controller.php');
 $hybridauth = new Hybridauth($config);
 
 // Agafem el provider que es passa per GET (Google, GitHub, etc.)

@@ -50,9 +50,13 @@ require_once('../../env.php');
             <input type="button" class="button" value="Tornar" onclick="window.location.href='inici'">
 
             <div class="login-container">
+                <!-- Botón para iniciar sesión con GitHub -->
                 <a href="../../Controlador/hybridAuth.php?provider=GitHub">
-                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-                        alt="Iniciar sesión con GitHub">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Iniciar sesión con GitHub">
+                </a>
+                <!-- Botón para iniciar sesión con Google -->
+                <a href="../../Controlador/hybridAuth.php?provider=Google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/150px-Google_%22G%22_logo.svg.png" alt="Iniciar sesión con Google">
                 </a>
             </div>
         </form>
